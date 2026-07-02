@@ -1,0 +1,478 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
+import { PixelatedCanvas } from "@/components/ui/pixel-art-image-component";
+import kartImg from "../../ямато_фото/картw-optimized.webp";
+import wavePattern from "../../ямато_фото/wave-pattern.jpg";
+import foodImg from "../../ямато_фото/еда.png";
+import hallImg from "../../ямато_фото/зал.png";
+import streetImg from "../../ямато_фото/улицабезводы.jpeg";
+import teapotImg from "../../ямато_фото/чайник.png";
+
+const heroImg = kartImg;
+
+export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Yamato Lounge — Кальянная в японском стиле | Барнаул" },
+      {
+        name: "description",
+        content:
+          "Yamato Lounge — атмосферная кальянная в Барнауле в японском стиле. Классические и сигарные чаши, каскады. Две локации. Бронирование стола 18+.",
+      },
+      { property: "og:title", content: "Yamato Lounge — Кальянная в Барнауле" },
+      {
+        property: "og:description",
+        content: "Японская эстетика, премиум табаки, две локации в Барнауле.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: heroImg },
+    ],
+    links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
+      { rel: "preload", as: "image", href: heroImg, fetchPriority: "high" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Shippori+Mincho+B1:wght@500;700;800&family=Italiana&family=Noto+Sans+JP:wght@300;400;500;700&family=Zen+Old+Mincho:wght@400;500;700;900&family=Spectral:wght@400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap",
+      },
+    ],
+  }),
+  component: Index,
+});
+
+const PRICES = [
+  {
+    name: "Классическая чаша",
+    kanji: "古典",
+    price: "1 200 ₽",
+    desc: "Чаша с сочетанием классического ассортимента.",
+  },
+  {
+    name: "Сигарная чаша",
+    kanji: "葉巻",
+    price: "1 500 ₽",
+    desc: "Чаша из сигарных табаков.",
+  },
+  {
+    name: "Сигарная добавка к классике",
+    kanji: "追加",
+    price: "200 ₽",
+    desc: "Добавка сигарных табаков к классическим.",
+  },
+  {
+    name: "Каскадная чаша",
+    kanji: "滝",
+    price: "от 2 000 ₽",
+    desc: "Сочетание определённых сигарных табаков с определёнными сортами чая.",
+  },
+];
+
+const LOCATIONS = [
+  {
+    title: "Улица 65 лет Победы",
+    address: "ул. 65 лет Победы, 20, Барнаул",
+    map: "https://yandex.ru/map-widget/v1/?ll=83.683700%2C53.366500&mode=search&text=%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2065%20%D0%BB%D0%B5%D1%82%20%D0%9F%D0%BE%D0%B1%D0%B5%D0%B4%D1%8B%2020%20%D0%91%D0%B0%D1%80%D0%BD%D0%B0%D1%83%D0%BB&z=16",
+    yLink: "https://yandex.ru/maps/?text=улица+65+лет+Победы+20+Барнаул",
+  },
+  {
+    title: "Гостиница «Алтай»",
+    address: "проспект Ленина, 24, Барнаул",
+    map: "https://yandex.ru/map-widget/v1/?ll=83.778000%2C53.346500&mode=search&text=%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2024%20%D0%91%D0%B0%D1%80%D0%BD%D0%B0%D1%83%D0%BB&z=16",
+    yLink: "https://yandex.ru/maps/?text=проспект+Ленина+24+Барнаул",
+  },
+];
+
+const SPACE = [
+  { src: hallImg, alt: "Главный зал Yamato Lounge", caption: "Главный зал" },
+  { src: foodImg, alt: "Еда в Yamato Lounge", caption: "Еда" },
+  { src: streetImg, alt: "Фасад заведения Yamato Lounge", caption: "Снаружи" },
+  { src: teapotImg, alt: "Чайник в Yamato Lounge", caption: "Чайная церемония" },
+];
+
+const PHONE = "+7 (923) 111-22-33";
+const PHONE_TEL = "+79231112233";
+const TG = "yamato_lounge_brn";
+
+const NAV_LINKS = [
+  { href: "#menu", label: "Меню" },
+  { href: "#space", label: "Пространство" },
+  { href: "#locations", label: "Локации" },
+  { href: "#contacts", label: "Контакты" },
+];
+
+function Index() {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  return (
+    <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
+      {/* Nav */}
+      <header className="fixed top-0 left-0 right-0 z-30 border-b border-border/40 bg-background/70 backdrop-blur-md">
+        <div className="relative mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
+          <a href="#top" className="flex items-center gap-2">
+            <span className="font-display text-lg font-bold tracking-widest text-primary sm:text-xl">
+              大和
+            </span>
+            <span className="hidden font-display text-sm uppercase tracking-[0.3em] text-foreground/80 sm:inline">
+              Yamato
+            </span>
+          </a>
+          {/* Desktop nav — centered */}
+          <nav className="pointer-events-none absolute inset-x-0 top-1/2 hidden -translate-y-1/2 justify-center gap-10 text-sm tracking-[0.2em] uppercase text-muted-foreground md:flex">
+            {NAV_LINKS.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                className="nav-link pointer-events-auto relative pb-1 transition-colors hover:text-foreground"
+              >
+                {l.label}
+              </a>
+            ))}
+          </nav>
+          {/* Spacer to balance flex on desktop */}
+          <div className="hidden w-12 md:block" />
+          {/* Mobile nav */}
+          <nav className="flex gap-4 text-xs tracking-wider text-muted-foreground md:hidden">
+            {NAV_LINKS.map((l) => (
+              <a key={l.href} href={l.href} className="nav-link relative pb-1 uppercase">
+                {l.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+      </header>
+
+      {/* HERO */}
+      <section
+        id="top"
+        className="relative flex min-h-screen items-center justify-center pt-20"
+      >
+        <div className="absolute inset-0 pointer-events-auto">
+          <PixelatedCanvas
+            src={kartImg}
+            width={typeof window !== 'undefined' ? window.innerWidth : 1920}
+            height={typeof window !== 'undefined' ? window.innerHeight : 1080}
+            cellSize={12}
+            dotScale={0.8}
+            shape="square"
+            backgroundColor="transparent"
+            responsive
+            dropoutStrength={0.4}
+            interactive
+            distortionStrength={4}
+            distortionRadius={100}
+            distortionMode="swirl"
+            followSpeed={0.25}
+            sampleAverage={false}
+            tintColor="#c8102e"
+            tintStrength={0.12}
+            jitterStrength={2}
+            jitterSpeed={2}
+            fadeOnLeave
+            fadeSpeed={0.15}
+            objectFit="cover"
+            maxFps={24}
+            className="w-full h-full opacity-90"
+          />
+        </div>
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/60 via-background/30 to-background z-10" />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-25 mix-blend-overlay z-10"
+          style={{ background: "var(--gradient-ember)" }}
+        />
+
+        <div className="pointer-events-none relative z-10 mx-auto max-w-4xl px-6 text-center [&_a]:pointer-events-auto [&_button]:pointer-events-auto">
+          <p className="font-jp text-base tracking-[0.5em] text-accent sm:text-lg">
+            煙 と 魂
+          </p>
+          <h1 className="mt-6 font-display text-5xl font-bold leading-[0.95] tracking-tight text-foreground sm:text-7xl md:text-8xl lg:text-[9rem]">
+            YAMATO
+            <span className="mt-2 block italic text-primary font-serif-display">
+              Lounge
+            </span>
+          </h1>
+          <div className="mx-auto mt-6 h-px w-32 bg-accent/60" />
+          <p className="mx-auto mt-8 max-w-2xl font-jp text-2xl tracking-[0.25em] text-foreground/90 sm:text-3xl md:text-4xl">
+            煙の中に、静けさを。
+          </p>
+          <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            <button
+              onClick={() => setOpen(true)}
+              className="group relative w-full overflow-hidden rounded-md bg-primary px-10 py-4 btn-text text-sm font-medium uppercase tracking-[0.35em] text-primary-foreground shadow-[var(--shadow-crimson)] transition hover:scale-[1.02] hover:shadow-[var(--shadow-gold)] sm:w-auto"
+            >
+              <span className="relative z-10">Забронировать стол</span>
+              <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-accent/30 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+            </button>
+            <a
+              href="#menu"
+              className="w-full rounded-md border border-border px-10 py-4 btn-text text-sm font-medium uppercase tracking-[0.35em] text-foreground/90 transition hover:border-accent hover:text-accent sm:w-auto"
+            >
+              Меню
+            </a>
+          </div>
+        </div>
+
+        <div className="kanji-watermark absolute left-4 top-1/3 hidden text-[10rem] leading-none lg:block">
+          龍
+        </div>
+        <div className="kanji-watermark absolute right-4 bottom-20 hidden text-[10rem] leading-none lg:block">
+          鬼
+        </div>
+      </section>
+
+      {/* MENU / PRICE */}
+      <section id="menu" className="relative py-24 sm:py-32">
+        <div
+          className="absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage: `url(${wavePattern})`,
+            backgroundSize: "400px",
+          }}
+        />
+        <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="text-center">
+            <p className="font-accent text-xs tracking-[0.4em] text-accent">品書き</p>
+            <h2 className="mt-3 font-display text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
+              Меню
+            </h2>
+            <div className="gold-divider mx-auto mt-6 w-40" />
+          </div>
+
+          <div className="mt-16 grid gap-6 sm:grid-cols-2">
+            {PRICES.map((item) => (
+              <article
+                key={item.name}
+                className="group relative overflow-hidden rounded-lg border border-border bg-card p-6 transition hover:border-primary hover:shadow-[var(--shadow-crimson)] sm:p-8"
+              >
+                <span className="kanji-watermark absolute -right-4 -top-6 text-[7rem] leading-none transition group-hover:text-primary/20">
+                  {item.kanji}
+                </span>
+                <div className="relative">
+                  <div className="flex items-start justify-between gap-4">
+                    <h3 className="font-serif-display text-2xl italic font-semibold text-foreground sm:text-3xl">
+                      {item.name}
+                    </h3>
+                    <span className="shrink-0 font-serif-display text-2xl font-semibold italic text-accent sm:text-3xl">
+                      {item.price}
+                    </span>
+                  </div>
+                  <div className="gold-divider mt-4 w-full" />
+                  <p className="mt-4 font-serif-display text-base italic leading-relaxed text-muted-foreground sm:text-lg">
+                    {item.desc}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SPACE */}
+      <section id="space" className="relative bg-card/40 py-24 sm:py-32">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="text-center">
+            <p className="font-accent text-xs tracking-[0.4em] text-accent">空間</p>
+            <h2 className="mt-3 font-display text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
+              Наше пространство
+            </h2>
+            <div className="gold-divider mx-auto mt-6 w-40" />
+            <p className="mt-4 max-w-xl mx-auto text-muted-foreground">
+              Загляните внутрь — атмосфера, в которой хочется задержаться.
+            </p>
+          </div>
+
+          <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {SPACE.map((img, i) => (
+              <figure
+                key={img.src}
+                className={`group relative overflow-hidden rounded-lg border border-border shadow-[var(--shadow-crimson)] transition hover:border-primary ${
+                  i === 0 ? "lg:col-span-2 lg:row-span-2" : ""
+                }`}
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  loading="lazy"
+                  width={1280}
+                  height={896}
+                  className={`w-full object-cover transition duration-700 group-hover:scale-105 ${
+                    i === 0 ? "h-72 sm:h-80 lg:h-full" : "h-56 sm:h-64"
+                  }`}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/10 to-transparent" />
+                <figcaption className="absolute bottom-3 left-4 font-serif-display text-lg italic text-foreground/90">
+                  {img.caption}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* LOCATIONS */}
+      <section id="locations" className="relative py-24 sm:py-32">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="text-center">
+            <p className="font-accent text-xs tracking-[0.4em] text-accent">場所</p>
+            <h2 className="mt-3 font-display text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
+              Локации
+            </h2>
+            <div className="gold-divider mx-auto mt-6 w-40" />
+            <p className="mt-4 text-muted-foreground">Две точки в Барнауле</p>
+          </div>
+
+          <div className="mt-16 grid gap-10 lg:grid-cols-2">
+            {LOCATIONS.map((loc) => (
+              <div key={loc.title} className="group">
+                <div className="mb-4">
+                  <h3 className="font-display text-2xl font-bold text-foreground">
+                    {loc.title}
+                  </h3>
+                  <p className="mt-1 text-muted-foreground">{loc.address}</p>
+                </div>
+                <div className="overflow-hidden rounded-lg border border-border shadow-[var(--shadow-crimson)] transition group-hover:border-primary">
+                  <iframe
+                    src={loc.map}
+                    title={`Карта: ${loc.title}`}
+                    className="h-72 w-full border-0 sm:h-80"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                </div>
+                <a
+                  href={loc.yLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-3 inline-block text-sm tracking-wider text-accent hover:underline"
+                >
+                  Открыть в Яндекс.Картах →
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CONTACTS */}
+      <section id="contacts" className="relative bg-card/40 py-24 sm:py-32">
+        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
+          <p className="font-accent text-xs tracking-[0.4em] text-accent">連絡先</p>
+          <h2 className="mt-3 font-display text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
+            Контакты
+          </h2>
+          <div className="gold-divider mx-auto mt-6 w-40" />
+
+          <div className="mt-12 grid gap-6 sm:grid-cols-2">
+            <a
+              href={`tel:${PHONE_TEL}`}
+              className="group rounded-lg border border-border bg-card p-8 transition hover:border-primary hover:shadow-[var(--shadow-crimson)]"
+            >
+              <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                Телефон
+              </p>
+              <p className="mt-3 font-sans text-2xl font-medium tracking-wide text-foreground transition group-hover:text-accent sm:text-3xl">
+                {PHONE}
+              </p>
+            </a>
+            <a
+              href={`https://t.me/${TG}`}
+              target="_blank"
+              rel="noreferrer"
+              className="group rounded-lg border border-border bg-card p-8 transition hover:border-primary hover:shadow-[var(--shadow-crimson)]"
+            >
+              <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                Telegram
+              </p>
+              <p className="mt-3 font-sans text-2xl font-medium tracking-wide text-foreground transition group-hover:text-accent sm:text-3xl">
+                @{TG}
+              </p>
+            </a>
+          </div>
+
+          <button
+            onClick={() => setOpen(true)}
+            className="mt-12 rounded-md bg-primary px-10 py-4 btn-text text-sm font-medium uppercase tracking-[0.35em] text-primary-foreground shadow-[var(--shadow-crimson)] transition hover:scale-[1.02]"
+          >
+            Забронировать стол
+          </button>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="border-t border-border bg-card/40 py-10">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
+            <div>
+              <p className="font-display text-lg font-bold tracking-widest text-primary">
+                大和 · YAMATO LOUNGE
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                © {new Date().getFullYear()} Yamato Lounge, Барнаул
+              </p>
+            </div>
+            <p className="max-w-sm text-xs text-muted-foreground leading-relaxed">
+              Курение вредит вашему здоровью.<br />
+              Заведение для лиц старше 18 лет.
+            </p>
+          </div>
+        </div>
+      </footer>
+
+      {/* BOOKING MODAL */}
+      {open && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 px-4 backdrop-blur-md"
+          onClick={() => setOpen(false)}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-md overflow-hidden rounded-xl border border-primary/60 bg-card p-8 text-center shadow-[var(--shadow-crimson)] sm:p-10"
+          >
+            <button
+              onClick={() => setOpen(false)}
+              aria-label="Закрыть"
+              className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted-foreground transition hover:border-primary hover:text-primary"
+            >
+              ✕
+            </button>
+            <span className="kanji-watermark absolute -right-6 -bottom-10 text-[10rem] leading-none">
+              予約
+            </span>
+            <div className="relative">
+              <p className="font-accent text-xs tracking-[0.4em] text-accent">
+                予約 · BOOKING
+              </p>
+              <h3 className="mt-3 font-display text-2xl font-bold sm:text-3xl">
+                Забронировать стол
+              </h3>
+              <div className="gold-divider mx-auto mt-4 w-24" />
+              <p className="mt-5 text-sm text-muted-foreground">
+                Позвоните нам — забронируем место и подготовим вашу любимую чашу.
+              </p>
+              <a
+                href={`tel:${PHONE_TEL}`}
+                className="mt-6 block font-sans text-3xl font-medium tracking-wide text-primary transition hover:text-accent sm:text-4xl"
+              >
+                {PHONE}
+              </a>
+              <a
+                href={`https://t.me/${TG}`}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-6 inline-block rounded-md border border-border px-6 py-3 text-sm tracking-wider text-foreground transition hover:border-accent hover:text-accent"
+              >
+                Написать в Telegram
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
