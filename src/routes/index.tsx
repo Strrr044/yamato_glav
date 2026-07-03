@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { PixelatedCanvas } from "@/components/ui/pixel-art-image-component";
+import heroStaticImg from "../../ямато_фото/картw-static-effect.webp";
 import kartImg from "../../ямато_фото/картw-optimized.webp";
 import wavePattern from "../../ямато_фото/wave-pattern.jpg";
 import foodImg from "../../ямато_фото/еда.png";
@@ -8,7 +8,7 @@ import hallImg from "../../ямато_фото/зал.png";
 import streetImg from "../../ямато_фото/улицабезводы.jpeg";
 import teapotImg from "../../ямато_фото/чайник.png";
 
-const heroImg = kartImg;
+const heroImg = heroStaticImg;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -153,32 +153,14 @@ function Index() {
         id="top"
         className="relative flex min-h-screen items-center justify-center pt-20"
       >
-        <div className="absolute inset-0 pointer-events-auto">
-          <PixelatedCanvas
-            src={kartImg}
-            width={typeof window !== 'undefined' ? window.innerWidth : 1920}
-            height={typeof window !== 'undefined' ? window.innerHeight : 1080}
-            cellSize={12}
-            dotScale={0.8}
-            shape="square"
-            backgroundColor="transparent"
-            responsive
-            dropoutStrength={0.4}
-            interactive
-            distortionStrength={4}
-            distortionRadius={100}
-            distortionMode="swirl"
-            followSpeed={0.25}
-            sampleAverage={false}
-            tintColor="#c8102e"
-            tintStrength={0.12}
-            jitterStrength={2}
-            jitterSpeed={2}
-            fadeOnLeave
-            fadeSpeed={0.15}
-            objectFit="cover"
-            maxFps={24}
-            className="w-full h-full opacity-90"
+        <div className="absolute inset-0">
+          <img
+            src={heroStaticImg}
+            alt=""
+            fetchPriority="high"
+            width={1536}
+            height={1024}
+            className="h-full w-full object-cover opacity-90"
           />
         </div>
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/60 via-background/30 to-background z-10" />
