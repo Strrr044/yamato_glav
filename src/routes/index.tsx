@@ -33,7 +33,7 @@ export const Route = createFileRoute("/")({
       { rel: "preload", as: "image", href: heroImg, fetchPriority: "high" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Shippori+Mincho+B1:wght@500;700;800&family=Italiana&family=Noto+Sans+JP:wght@300;400;500;700&family=Zen+Old+Mincho:wght@400;500;700;900&family=Spectral:wght@400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@700;800&family=Shippori+Mincho+B1:wght@500;700;800&family=Italiana&family=Noto+Sans+JP:wght@300;400;500;700&family=Ruslan+Display&family=Zen+Old+Mincho:wght@400;500;700;900&family=Spectral:wght@400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap",
       },
     ],
   }),
@@ -173,10 +173,25 @@ function Index() {
           <p className="font-jp text-base tracking-[0.5em] text-accent sm:text-lg">
             煙 と 魂
           </p>
-          <h1 className="mt-6 font-display text-5xl font-bold leading-[0.95] tracking-tight text-foreground sm:text-7xl md:text-8xl lg:text-[9rem]">
-            YAMATO
-            <span className="mt-2 block italic text-primary font-serif-display">
-              Lounge
+          <h1 className="mt-6 text-center text-foreground">
+            <span
+              className="block text-5xl font-extrabold uppercase leading-[0.95] tracking-[0.28em] sm:text-7xl md:text-8xl lg:text-[8rem]"
+              style={{ fontFamily: '"Inter", sans-serif' }}
+            >
+              ЯМАТО
+            </span>
+            <span className="mx-auto mt-4 block h-px w-20 bg-accent/70" />
+            <span className="mt-4 block font-jp text-xl tracking-[0.5em] text-accent sm:text-2xl">
+              火
+            </span>
+            <span
+              className="mt-5 block text-5xl uppercase leading-[0.95] tracking-[0.04em] text-primary sm:text-6xl md:text-7xl lg:text-[6.5rem]"
+              style={{ fontFamily: '"Ruslan Display", serif' }}
+            >
+              МАЛАЯ
+            </span>
+            <span className="mt-2 block font-serif-display text-2xl italic lowercase tracking-[0.12em] text-foreground/92 sm:text-3xl md:text-[2.6rem]">
+              чайная
             </span>
           </h1>
           <div className="mx-auto mt-6 h-px w-32 bg-accent/60" />
