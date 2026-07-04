@@ -64,9 +64,30 @@ const SPACE = [
   { src: teapotImg, alt: "Чайник в Yamato Lounge", caption: "Чайная церемония" },
 ];
 
-const PHONE = "+7 (923) 111-22-33";
-const PHONE_TEL = "+79231112233";
-const TG = "yamato_lounge_brn";
+const CONTACT_BRANCHES = [
+  {
+    name: "Ямато Lounge",
+    label: "Ленина",
+    phone: "+7 (960) 964-81-94",
+    tel: "+79609648194",
+    telegram: "https://t.me/yamato_lounge",
+    telegramLabel: "@yamato_lounge",
+    instagram: "https://www.instagram.com/yamato.lounge?igsh=ZGc2a3c2c3dnMGJm",
+    instagramLabel: "@yamato.lounge",
+  },
+  {
+    name: "Малая Чайная",
+    label: "65 лет Победы",
+    phone: "+7 (909) 507-58-79",
+    tel: "+79095075879",
+    telegram: "https://t.me/tea22",
+    telegramLabel: "@tea22",
+    instagram: "https://www.instagram.com/malaya_chaynaya?igsh=MTJ4dGJramJuOHI0dg==",
+    instagramLabel: "@malaya_chaynaya",
+    vk: "https://vk.com/22tea",
+    vkLabel: "vk.com/22tea",
+  },
+];
 
 const NAV_LINKS = [
   { href: "#menu", label: "Меню" },
@@ -162,7 +183,7 @@ function Index() {
             <img
               src={malayaChaynayaLogoText}
               alt="Малая чайная"
-              className="hero-subtitle-haze gold-outline-glow hero-gold-breathe mx-auto mt-4 block h-[6.5rem] w-auto sm:h-[6rem] md:h-[8rem] lg:h-[10rem]"s
+              className="hero-subtitle-haze gold-outline-glow hero-gold-breathe mx-auto mt-4 block h-[6.5rem] w-auto sm:h-[6rem] md:h-[8rem] lg:h-[10rem]"
             />
           </h1>
           <p className="mx-auto mt-8 max-w-2xl font-jp text-2xl tracking-[0.25em] text-foreground/90 sm:text-3xl md:text-4xl">
@@ -305,36 +326,103 @@ function Index() {
 
       {/* CONTACTS */}
       <section id="contacts" className="relative bg-card/40 py-24 sm:py-32">
-        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
+        <div className="mx-auto max-w-6xl px-4 text-center sm:px-6">
           <p className="font-accent text-xs tracking-[0.4em] text-accent">連絡先</p>
           <h2 className="mt-3 font-display text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
             Контакты
           </h2>
           <div className="gold-divider mx-auto mt-6 w-40" />
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2">
+          <div className="mt-12 space-y-6">
+            <div className="grid gap-6 lg:grid-cols-2">
+              <a
+                href={`tel:${CONTACT_BRANCHES[0].tel}`}
+                className="group rounded-lg border border-border bg-card p-8 text-left transition hover:border-primary hover:shadow-[var(--shadow-crimson)]"
+              >
+                <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Ленина</p>
+                <p className="mt-3 font-display text-2xl font-bold text-foreground sm:text-3xl">Телефон</p>
+                <p className="mt-3 font-sans text-2xl font-medium tracking-wide text-foreground transition group-hover:text-accent sm:text-3xl">
+                  {CONTACT_BRANCHES[0].phone}
+                </p>
+              </a>
+
+              <a
+                href={`tel:${CONTACT_BRANCHES[1].tel}`}
+                className="group rounded-lg border border-border bg-card p-8 text-left transition hover:border-primary hover:shadow-[var(--shadow-crimson)]"
+              >
+                <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">65 лет Победы</p>
+                <p className="mt-3 font-display text-2xl font-bold text-foreground sm:text-3xl">Телефон</p>
+                <p className="mt-3 font-sans text-2xl font-medium tracking-wide text-foreground transition group-hover:text-accent sm:text-3xl">
+                  {CONTACT_BRANCHES[1].phone}
+                </p>
+              </a>
+            </div>
+
+            <div className="grid gap-6 lg:grid-cols-2">
+              <a
+                href={CONTACT_BRANCHES[1].telegram}
+                target="_blank"
+                rel="noreferrer"
+                className="group rounded-lg border border-border bg-card p-8 text-left transition hover:border-primary hover:shadow-[var(--shadow-crimson)]"
+              >
+                <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Малая Чайная</p>
+                <p className="mt-3 font-display text-2xl font-bold text-foreground sm:text-3xl">Telegram</p>
+                <p className="mt-3 font-sans text-xl font-medium tracking-wide text-foreground transition group-hover:text-accent sm:text-2xl">
+                  {CONTACT_BRANCHES[1].telegramLabel}
+                </p>
+              </a>
+
+              <a
+                href={CONTACT_BRANCHES[0].telegram}
+                target="_blank"
+                rel="noreferrer"
+                className="group rounded-lg border border-border bg-card p-8 text-left transition hover:border-primary hover:shadow-[var(--shadow-crimson)]"
+              >
+                <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Ямато</p>
+                <p className="mt-3 font-display text-2xl font-bold text-foreground sm:text-3xl">Telegram</p>
+                <p className="mt-3 font-sans text-xl font-medium tracking-wide text-foreground transition group-hover:text-accent sm:text-2xl">
+                  {CONTACT_BRANCHES[0].telegramLabel}
+                </p>
+              </a>
+            </div>
+
+            <div className="grid gap-6 lg:grid-cols-2">
+              <a
+                href={CONTACT_BRANCHES[1].instagram}
+                target="_blank"
+                rel="noreferrer"
+                className="group rounded-lg border border-border bg-card p-8 text-left transition hover:border-primary hover:shadow-[var(--shadow-crimson)]"
+              >
+                <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Малая Чайная</p>
+                <p className="mt-3 font-display text-2xl font-bold text-foreground sm:text-3xl">Instagram</p>
+                <p className="mt-3 font-sans text-xl font-medium tracking-wide text-foreground transition group-hover:text-accent sm:text-2xl">
+                  {CONTACT_BRANCHES[1].instagramLabel}
+                </p>
+              </a>
+
+              <a
+                href={CONTACT_BRANCHES[0].instagram}
+                target="_blank"
+                rel="noreferrer"
+                className="group rounded-lg border border-border bg-card p-8 text-left transition hover:border-primary hover:shadow-[var(--shadow-crimson)]"
+              >
+                <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Ямато</p>
+                <p className="mt-3 font-display text-2xl font-bold text-foreground sm:text-3xl">Instagram</p>
+                <p className="mt-3 font-sans text-xl font-medium tracking-wide text-foreground transition group-hover:text-accent sm:text-2xl">
+                  {CONTACT_BRANCHES[0].instagramLabel}
+                </p>
+              </a>
+            </div>
+
             <a
-              href={`tel:${PHONE_TEL}`}
-              className="group rounded-lg border border-border bg-card p-8 transition hover:border-primary hover:shadow-[var(--shadow-crimson)]"
-            >
-              <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-                Телефон
-              </p>
-              <p className="mt-3 font-sans text-2xl font-medium tracking-wide text-foreground transition group-hover:text-accent sm:text-3xl">
-                {PHONE}
-              </p>
-            </a>
-            <a
-              href={`https://t.me/${TG}`}
+              href={CONTACT_BRANCHES[1].vk}
               target="_blank"
               rel="noreferrer"
-              className="group rounded-lg border border-border bg-card p-8 transition hover:border-primary hover:shadow-[var(--shadow-crimson)]"
+              className="group block rounded-lg border border-border bg-card p-8 text-center transition hover:border-primary hover:shadow-[var(--shadow-crimson)]"
             >
-              <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-                Telegram
-              </p>
-              <p className="mt-3 font-sans text-2xl font-medium tracking-wide text-foreground transition group-hover:text-accent sm:text-3xl">
-                @{TG}
+              <p className="font-display text-2xl font-bold text-foreground sm:text-3xl">VK</p>
+              <p className="mt-3 font-sans text-xl font-medium tracking-wide text-foreground transition group-hover:text-accent sm:text-2xl">
+                {CONTACT_BRANCHES[1].vkLabel}
               </p>
             </a>
           </div>
@@ -400,13 +488,13 @@ function Index() {
                 Позвоните нам — забронируем место и подготовим вашу любимую чашу.
               </p>
               <a
-                href={`tel:${PHONE_TEL}`}
+                href={`tel:${CONTACT_BRANCHES[0].tel}`}
                 className="mt-6 block font-sans text-3xl font-medium tracking-wide text-primary transition hover:text-accent sm:text-4xl"
               >
-                {PHONE}
+                {CONTACT_BRANCHES[0].phone}
               </a>
               <a
-                href={`https://t.me/${TG}`}
+                href={CONTACT_BRANCHES[0].telegram}
                 target="_blank"
                 rel="noreferrer"
                 className="mt-6 inline-block rounded-md border border-border px-6 py-3 text-sm tracking-wider text-foreground transition hover:border-accent hover:text-accent"
