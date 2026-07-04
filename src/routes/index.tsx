@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
+import BranchMenu from "@/components/BranchMenu";
 import heroStaticImg from "../../ямато_фото/картw-static-effect.webp";
 import kartImg from "../../ямато_фото/картw-optimized.webp";
 import wavePattern from "../../ямато_фото/wave-pattern.jpg";
@@ -7,7 +8,7 @@ import foodImg from "../../ямато_фото/еда.png";
 import hallImg from "../../ямато_фото/зал.png";
 import streetImg from "../../ямато_фото/улицабезводы.jpeg";
 import teapotImg from "../../ямато_фото/чайник.png";
-import malayaChaynayaLogoText from "../../ямато_фото/малая_чайная_вектор.svg";
+import malayaChaynayaLogoText from "../../ямато_фото/malaya-chaynaya-upscaled.png";
 
 const heroImg = heroStaticImg;
 
@@ -34,39 +35,12 @@ export const Route = createFileRoute("/")({
       { rel: "preload", as: "image", href: heroImg, fetchPriority: "high" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@700;800&family=Shippori+Mincho+B1:wght@500;700;800&family=Italiana&family=Noto+Sans+JP:wght@300;400;500;700&family=Ruslan+Display&family=Zen+Old+Mincho:wght@400;500;700;900&family=Spectral:wght@400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@700;800&family=Shippori+Mincho+B1:wght@500;700;800&family=Italiana&family=Noto+Sans+JP:wght@300;400;500;700&family=Ruslan+Display&family=Zen+Old+Mincho:wght@400;500;700;900&family=Spectral:wght@400;500;600&family=Cinzel:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap",
       },
     ],
   }),
   component: Index,
 });
-
-const PRICES = [
-  {
-    name: "Классическая чаша",
-    kanji: "古典",
-    price: "1 200 ₽",
-    desc: "Чаша с сочетанием классического ассортимента.",
-  },
-  {
-    name: "Сигарная чаша",
-    kanji: "葉巻",
-    price: "1 500 ₽",
-    desc: "Чаша из сигарных табаков.",
-  },
-  {
-    name: "Сигарная добавка к классике",
-    kanji: "追加",
-    price: "200 ₽",
-    desc: "Добавка сигарных табаков к классическим.",
-  },
-  {
-    name: "Каскадная чаша",
-    kanji: "滝",
-    price: "от 2 000 ₽",
-    desc: "Сочетание определённых сигарных табаков с определёнными сортами чая.",
-  },
-];
 
 const LOCATIONS = [
   {
@@ -173,7 +147,7 @@ function Index() {
           </p>
           <h1 className="mt-6 text-center text-foreground">
             <span
-              className="hero-title-haze block text-5xl font-extrabold uppercase leading-[0.95] tracking-[0.22em] text-[#fff7df] sm:text-7xl md:text-8xl lg:text-[8rem]"
+              className="hero-title-haze block text-7xl font-extrabold uppercase leading-[0.95] tracking-[0.22em] text-[#fff7df] sm:text-7xl md:text-8xl lg:text-[9rem]"
               style={{
                 fontFamily: '"Inter", sans-serif',
                 textShadow:
@@ -188,7 +162,7 @@ function Index() {
             <img
               src={malayaChaynayaLogoText}
               alt="Малая чайная"
-              className="hero-subtitle-haze gold-outline-glow hero-gold-breathe mx-auto mt-4 block h-[4.6rem] w-auto sm:h-[7.5rem] md:h-[9.5rem] lg:h-[11.8rem]"
+              className="hero-subtitle-haze gold-outline-glow hero-gold-breathe mx-auto mt-4 block h-[6.5rem] w-auto sm:h-[6rem] md:h-[8rem] lg:h-[10rem]"s
             />
           </h1>
           <p className="mx-auto mt-8 max-w-2xl font-jp text-2xl tracking-[0.25em] text-foreground/90 sm:text-3xl md:text-4xl">
@@ -237,31 +211,8 @@ function Index() {
             <div className="gold-divider mx-auto mt-6 w-40" />
           </div>
 
-          <div className="mt-16 grid gap-6 sm:grid-cols-2">
-            {PRICES.map((item) => (
-              <article
-                key={item.name}
-                className="group relative overflow-hidden rounded-lg border border-border bg-card p-6 transition hover:border-primary hover:shadow-[var(--shadow-crimson)] sm:p-8"
-              >
-                <span className="kanji-watermark absolute -right-4 -top-6 text-[7rem] leading-none transition group-hover:text-primary/20">
-                  {item.kanji}
-                </span>
-                <div className="relative">
-                  <div className="flex items-start justify-between gap-4">
-                    <h3 className="font-serif-display text-2xl italic font-semibold text-foreground sm:text-3xl">
-                      {item.name}
-                    </h3>
-                    <span className="shrink-0 font-serif-display text-2xl font-semibold italic text-accent sm:text-3xl">
-                      {item.price}
-                    </span>
-                  </div>
-                  <div className="gold-divider mt-4 w-full" />
-                  <p className="mt-4 font-serif-display text-base italic leading-relaxed text-muted-foreground sm:text-lg">
-                    {item.desc}
-                  </p>
-                </div>
-              </article>
-            ))}
+          <div className="mt-14">
+            <BranchMenu />
           </div>
         </div>
       </section>

@@ -80,8 +80,8 @@
   --font-jp: "Shippori Mincho B1", "Noto Serif JP", serif;
   --font-body: "EB Garamond", "Cormorant Garamond", Georgia, serif;
   --font-sans: "EB Garamond", "Noto Sans JP", Georgia, serif;
-  --font-nav: "Playfair Display", serif;
-  --font-btn: "Playfair Display", serif;
+  --font-nav: "Cinzel", serif;
+  --font-btn: "Cinzel", serif;
 
   --gradient-blood: linear-gradient(135deg, oklch(0.32 0.18 25) 0%, oklch(0.16 0.06 25) 100%);
   --gradient-ember: radial-gradient(circle at 50% 0%, oklch(0.45 0.22 25 / 0.6) 0%, transparent 70%);
@@ -106,6 +106,12 @@
     font-family: var(--font-display);
     letter-spacing: 0.02em;
   }
+}
+
+/* Плавное раскрытие аккордеона меню (~0.3s) */
+[data-radix-accordion-content] {
+  animation-duration: 0.3s !important;
+  animation-timing-function: ease-out !important;
 }
 
 @utility kanji-watermark {
