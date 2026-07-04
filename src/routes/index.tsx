@@ -7,6 +7,7 @@ import foodImg from "../../ямато_фото/еда.png";
 import hallImg from "../../ямато_фото/зал.png";
 import streetImg from "../../ямато_фото/улицабезводы.jpeg";
 import teapotImg from "../../ямато_фото/чайник.png";
+import malayaChaynayaLogoText from "../../ямато_фото/малая_чайная_вектор.svg";
 
 const heroImg = heroStaticImg;
 
@@ -115,12 +116,9 @@ function Index() {
       {/* Nav */}
       <header className="fixed top-0 left-0 right-0 z-30 border-b border-border/40 bg-background/70 backdrop-blur-md">
         <div className="relative mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
-          <a href="#top" className="flex items-center gap-2">
+          <a href="#top" className="flex items-center">
             <span className="font-display text-lg font-bold tracking-widest text-primary sm:text-xl">
               大和
-            </span>
-            <span className="hidden font-display text-sm uppercase tracking-[0.3em] text-foreground/80 sm:inline">
-              Yamato
             </span>
           </a>
           {/* Desktop nav — centered */}
@@ -170,31 +168,29 @@ function Index() {
         />
 
         <div className="pointer-events-none relative z-10 mx-auto max-w-4xl px-6 text-center [&_a]:pointer-events-auto [&_button]:pointer-events-auto">
-          <p className="font-jp text-base tracking-[0.5em] text-accent sm:text-lg">
+          <p className="font-jp animate-in fade-in slide-in-from-top-2 duration-700 text-base tracking-[0.5em] text-accent sm:text-lg">
             煙 と 魂
           </p>
           <h1 className="mt-6 text-center text-foreground">
             <span
-              className="block text-5xl font-extrabold uppercase leading-[0.95] tracking-[0.28em] sm:text-7xl md:text-8xl lg:text-[8rem]"
-              style={{ fontFamily: '"Inter", sans-serif' }}
+              className="hero-title-haze block text-5xl font-extrabold uppercase leading-[0.95] tracking-[0.22em] text-[#fff7df] sm:text-7xl md:text-8xl lg:text-[8rem]"
+              style={{
+                fontFamily: '"Inter", sans-serif',
+                textShadow:
+                  '1.25px 0 0 rgba(212, 175, 55, 0.98), -1.25px 0 0 rgba(212, 175, 55, 0.98), 0 1.25px 0 rgba(212, 175, 55, 0.98), 0 -1.25px 0 rgba(212, 175, 55, 0.98), 0 0 9px rgba(212, 175, 55, 0.52), 0 0 20px rgba(191, 144, 45, 0.26)',
+              }}
             >
               ЯМАТО
             </span>
-            <span className="mx-auto mt-4 block h-px w-20 bg-accent/70" />
-            <span className="mt-4 block font-jp text-xl tracking-[0.5em] text-accent sm:text-2xl">
+            <span className="hero-kanji-float mt-4 block font-jp text-xl tracking-[0.5em] text-accent sm:text-2xl">
               火
             </span>
-            <span
-              className="mt-5 block text-5xl uppercase leading-[0.95] tracking-[0.04em] text-primary sm:text-6xl md:text-7xl lg:text-[6.5rem]"
-              style={{ fontFamily: '"Ruslan Display", serif' }}
-            >
-              МАЛАЯ
-            </span>
-            <span className="mt-2 block font-serif-display text-2xl italic lowercase tracking-[0.12em] text-foreground/92 sm:text-3xl md:text-[2.6rem]">
-              чайная
-            </span>
+            <img
+              src={malayaChaynayaLogoText}
+              alt="Малая чайная"
+              className="hero-subtitle-haze gold-outline-glow hero-gold-breathe mx-auto mt-4 block h-[4.6rem] w-auto sm:h-[7.5rem] md:h-[9.5rem] lg:h-[11.8rem]"
+            />
           </h1>
-          <div className="mx-auto mt-6 h-px w-32 bg-accent/60" />
           <p className="mx-auto mt-8 max-w-2xl font-jp text-2xl tracking-[0.25em] text-foreground/90 sm:text-3xl md:text-4xl">
             煙の中に、静けさを。
           </p>
